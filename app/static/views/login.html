@@ -1,0 +1,32 @@
+<div class="container">
+	<h1>Sign in</h1>
+	<form class="form-signin" ng-controller="loginController">
+		<div class="row form-group">
+			<div class="col-md-3">
+				<input class="form-control" type="text" name="account" placeholder='Username or Email' ng-model="login.account"/>
+			</div>
+			<div class="col-md-3">
+				<a href="/reset_password">Forgot your username?</a>
+			</div>
+		</div>
+
+		<div class="row form-group">
+			<div class="col-md-3">
+				<input class="form-control col-md-3" type="password" name="password" placeholder="Password" ng-model="login.password"/>
+			</div>
+			<div class="col-md-3">
+				<a href="/reset_password">Forgot your password?</a>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2">
+				<label class="checkbox"> <input type="checkbox" name="remember-me" value="remember-me">Remember me</label>
+			</div>
+
+			<button type="submit" class="btn btn-success col-md-1" ng-click="submit()">Login</button>
+		</div>
+	</form>
+	<p>New to iCollab?<a href="/signup">Sign up now</a>
+	</p>
+</div>

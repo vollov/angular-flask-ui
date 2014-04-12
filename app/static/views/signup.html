@@ -1,0 +1,46 @@
+<div class="container" ng-controller="signUpController">
+	<h1>Sign up</h1>
+	<form id="signup-form">
+
+		<!-- Username -->
+		<div class="row form-group" name="username">
+			<div class="col-md-3">
+				<input class="form-control" type="text" placeholder="Name" ng-model="user.username"/>
+			</div>
+			<div class="col-md-3 z-label">Your name*</div>
+		</div>
+
+		<!-- Password -->
+		<div class="row form-group" name="password">
+			<div class="col-md-3">
+				<input class="form-control" type="password" placeholder="Password" ng-model="user.password"/>
+			</div>
+			<div class="col-md-3 z-label">6 characters or more*</div>
+		</div>
+
+		<!-- Email -->
+		<div class="row form-group" name="email">
+			<div class="col-md-3">
+				<input class="form-control" type="text" placeholder="Email" ng-model="user.email"/>
+			</div>
+			<div class="col-md-3 z-label">Your email*</div>
+		</div>
+
+		<div class="row form-group" name="agreement">
+			<div class="col-md-3">
+				<div class="col-md-1">
+					<input class="checkbox z-input" type="checkbox" name="agreement"/>
+				</div>
+				<div class="col-md-10 z-label">I Agree the following terms</div>
+			</div>
+		</div>
+		<br/>
+
+		<div class="row col-md-12">
+			<div class="btn-toolbar col-md-10 z-btn-area">
+				<button type="submit" name="signup"
+					class="btn btn-primary col-md-3" ng-click="signUp()">Create account</button>
+			</div>
+		</div>
+	</form>
+</div>
