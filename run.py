@@ -1,6 +1,6 @@
-#from route import home
+from app.routes import index
 #from server import app
 
 from app import app
 
-app.run(debug = True)
+app.run()
