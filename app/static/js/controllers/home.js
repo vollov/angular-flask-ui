@@ -13,8 +13,7 @@ homeModule.controller('homeController',
 				$location.path('signup');
 			}
 
-		} ]).controller(
-		'signUpController',
+		} ]).controller('signUpController',
 		[
 				'$scope',
 				'$http',
@@ -45,34 +44,35 @@ homeModule.controller('homeController',
 								});
 
 					}
-				} ]).controller(
-		'loginController',
-		[
+				} ]).controller('loginController',
+			[
 				'$scope',
 				'$http',
 				'$location',
 				function($scope, $http, $location) {
+					
+					$scope.login = {username:'',password:'',remember:true};
+					
 					$scope.submit = function() {
 						$http.post('/login', $scope.login).success(
 								function(data, status) {
 									console.log('login success');
+									//if(data.error==0)
 									//LoginService.setLogin(true);
+									$location.path('/');
 								}).error(
 								function(data, status, headers, config) {
 									// called asynchronously if an error occurs, or server returns response with an error status.
 									console.log('login failed');
-
+									$location.path('/signup');
 								});
-
-						$location.path('/');
 					}
-				} ]).controller(
-		'logoutController',
-		[ '$scope', '$location', 'LoginService',
-				function($scope, $location, LoginService) {
+				} ]).controller('logoutController',
+		[ '$scope', '$location',
+				function($scope, $location) {
 
 					$scope.submit = function() {
-						LoginService.setLogin(false);
+						//LoginService.setLogin(false);
 						$location.path('login');
 					}
-				} ])
+				} ]);

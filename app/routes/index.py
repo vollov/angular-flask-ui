@@ -16,11 +16,11 @@ def login():
     form = LoginForm()
     if form.errors == []:
         service = UserService()
-        ret = service.login(form.account, form.password)
+        ret = service.login(form.account, form.password, form.remember_me)
         # flash('Logged in successfully!')
-        return jsonify({'error':ret})
+        return jsonify({'error':str(ret)})
     else:  # If input has error
-        return jsonify({'error':form.errors[0]})
+        return jsonify({'error':str(form.errors[0])})
 
 
 """

@@ -1,15 +1,30 @@
 from app.lib.model import Model, Dao
 
+class Role():
+    Admin, User = range(2)
+    
 class User(Model):
     def __init__(self, _dict):
         Model.__init__(self, _dict)
-         
+        
         self.username = _dict['username']
         self.password = _dict['password']
         self.email = _dict['email']
-        self.phone = _dict['phone']
-        self.role = _dict['role'] # Admin and None Admin
-        self.created = _dict['created']
+        
+        if 'phone' in _dict.keys():
+            self.phone = _dict['phone']
+        else:
+            self.phone = ''
+    
+        if 'role' in _dict.keys():
+            self.role = _dict['role'] # Admin and None Admin
+        else:
+            self.role = Role.User
+        
+        if 'created' in _dict.keys():    
+            self.created = _dict['created']
+        else:
+            self.created = 0
         #datetime.datetime.fromtimestamp(ts_epoch).strftime('%Y-%m-%d %H:%M:%S')
 
     def __repr__(self):

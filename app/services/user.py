@@ -1,4 +1,4 @@
-from app.models.user import User, UserDao
+from app.models.user import Role, User, UserDao
 from app.lib.validator import Validator
 from app.lib.form import Form, Mode
 
@@ -7,8 +7,7 @@ from flask_login import login_user
 import time
 from bson.objectid import ObjectId
 
-class Role():
-    Admin, User = range(2)
+
     
 class LoginError():
     NO_ERROR, USER_NOT_EXIT, WRONG_PASSWORD = range(3)
@@ -108,7 +107,7 @@ class UserService():
         if user is None:
             return LoginError.USER_NOT_EXIT
         else:
-            if user.password == password:
+            if user['password'] == password:
                 login_user(User(user), remember=remember_me)
                 return LoginError.NO_ERROR
             else:
@@ -189,7 +188,7 @@ class LoginForm(Form):
         Note: account can be username or email address
         '''
         Form.__init__(self)
-        account = self.request.values.get('account')
+        account = self.raw_inputs['account']
         
         self.validator = LoginValidator(account)
         
@@ -197,12 +196,9 @@ class LoginForm(Form):
             self.errors = self.validator.validate(self.raw_inputs)
             #if self.errors == []:
                 # If get fail, return None
-            self.account = self.request.values.get('account')
-            self.password = self.request.values.get('password')
-            if self.request.form.getlist('remember-me') == []:
-                self.remember_me = False
-            else:
-                self.remember_me = True
+            self.account = self.raw_inputs['account']
+            self.password = self.raw_inputs['password']
+            self.remember_me = self.raw_inputs['remember']
                 
     
 
