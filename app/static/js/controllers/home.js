@@ -18,7 +18,8 @@ homeModule.controller('homeController',
 				'$scope',
 				'$http',
 				'$location',
-				function($scope, $http, $location) {
+				'LoginService',
+				function($scope, $http, $location, LoginService) {
 					//$scope.user = {};
 
 					// $scope.$on('LoginEvent', function(event, bLoggedIn) {
@@ -27,7 +28,7 @@ homeModule.controller('homeController',
 
 					$scope.signUp = function() {
 						// var user = new User($scope.user);
-						// LoginService.setLogin(true);
+						// 
 						// $scope.loggedIn = true;
 						// $scope.$apply();
 						$http.post('/users', $scope.user).success(
@@ -35,6 +36,7 @@ homeModule.controller('homeController',
 									// will be called asynchronously when the response is available
 									if (data.id != '') {
 										console.log('signup successful');
+										LoginService.setLogin(true);
 										$location.path('/');
 									}
 								}).error(
@@ -49,7 +51,8 @@ homeModule.controller('homeController',
 				'$scope',
 				'$http',
 				'$location',
-				function($scope, $http, $location) {
+				'LoginService',
+				function($scope, $http, $location, LoginService) {
 					
 					$scope.login = {username:'',password:'',remember:true};
 					
@@ -58,7 +61,7 @@ homeModule.controller('homeController',
 								function(data, status) {
 									console.log('login success');
 									//if(data.error==0)
-									//LoginService.setLogin(true);
+									LoginService.setLogin(true);
 									$location.path('/');
 								}).error(
 								function(data, status, headers, config) {
@@ -68,11 +71,11 @@ homeModule.controller('homeController',
 								});
 					}
 				} ]).controller('logoutController',
-		[ '$scope', '$location',
-				function($scope, $location) {
+		[ '$scope', '$location','LoginService',
+				function($scope, $location, LoginService) {
 
 					$scope.submit = function() {
-						//LoginService.setLogin(false);
+						LoginService.setLogin(false);
 						$location.path('login');
 					}
 				} ]);

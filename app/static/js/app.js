@@ -1,5 +1,5 @@
 // Declare app level module which depends on filters, and services
-angular.module('feizai', [ 'ngResource', 'ngRoute', 'homeControllers' ])
+angular.module('feizai', [ 'ngResource', 'ngRoute', 'homeControllers','mainServices' ])
 		.config([ '$routeProvider', function($routeProvider) {
 			$routeProvider.when('/', {
 				templateUrl : 'views/home.html',
